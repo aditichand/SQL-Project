@@ -1,17 +1,19 @@
 # SQL-Project
 
+### Disclaimer: This project was done in a team of 6 as the final deliverable for a Master's Level Database Management course. The dataset and case description were chosen by the team.
+
 # Table of Contents
-[Background](https://github.com/aditichand/SQL-Project/tree/main#background) <br>
-[Business Problems and Objectives](https://github.com/aditichand/SQL-Project/tree/main#business-problems-and-objectives) <br>
-[Potential Features of the Customer Management System](https://github.com/aditichand/SQL-Project/tree/main#potential-features-of-the-customer-management-system) <br>
-[Relational Data Model](https://github.com/aditichand/SQL-Project/tree/main#relational-data-model) <br>
-[Assumptions/Notes About Data Entities and Relationships](https://github.com/aditichand/SQL-Project/tree/main#assumption-/-notes-about-data-entities-and-relationships) <br>
-[Entity-Relationship Diagram](https://github.com/aditichand/SQL-Project/tree/main#entity-relationship-diagram) <br>
-[Physical MySQL Database](https://github.com/aditichand/SQL-Project/tree/main#physical-mysql-database) <br> 
-[Data in the Database](https://github.com/aditichand/SQL-Project/tree/main#data-in-the-database) <br>
-[Business Solutions using Queries](https://github.com/aditichand/SQL-Project/tree/main#business-solutions-using-queries) <br>
-[SQL Queries](https://github.com/aditichand/SQL-Project/tree/main#sql-queries) <br>
-[Stored Procedure](https://github.com/aditichand/SQL-Project/tree/main#stored-procedure) <br>
+* [Background](https://github.com/aditichand/SQL-Project/tree/main#background) <br>
+     * [Business Problems and Objectives](https://github.com/aditichand/SQL-Project/tree/main#business-problems-and-objectives) <br>
+     * [Potential Features of the Customer Management System](https://github.com/aditichand/SQL-Project/tree/main#potential-features-of-the-customer-management-system) <br>
+* [Relational Data Model](https://github.com/aditichand/SQL-Project/tree/main#relational-data-model) <br>
+     * [Assumptions/Notes About Data Entities and Relationships](https://github.com/aditichand/SQL-Project/tree/main#assumptionsnotes-about-data-entities-and-relationships) <br>
+     * [Entity-Relationship Diagram](https://github.com/aditichand/SQL-Project/tree/main#entity-relationship-diagram) <br>
+* [Physical MySQL Database](https://github.com/aditichand/SQL-Project/tree/main#physical-mysql-database) <br> 
+     * [Data in the Database](https://github.com/aditichand/SQL-Project/tree/main#data-in-the-database) <br>
+* [Business Solutions using Queries](https://github.com/aditichand/SQL-Project/tree/main#business-solutions-using-queries) <br>
+     * [SQL Queries](https://github.com/aditichand/SQL-Project/tree/main#sql-queries) <br>
+     * [Stored Procedure](https://github.com/aditichand/SQL-Project/tree/main#stored-procedure) <br>
 
 
 ## Background
@@ -46,13 +48,13 @@ Services(ServiceID, ServiceName, Price)<br>
 Employees(EmployeeID, EmployeeFName, EmployeeLName, Title, Wage) Invoices(InvoiceNumber, PetID, OwnerID, ServiceID, EmployeeID, Date, Payment)<br>
 
 ## Assumptions/Notes About Data Entities and Relationships<br>
-*A pet can have only one owner, but an owner can have one or more pets.<br>
-*An employee can have 0 or more pets assigned to him, but a pet must have at least one employee assigned to it.<br>
-*An employee can perform 0, 1, or many services, on a pet, but a pet must receive at least one service.<br>
-*An owner can have none or many invoices, but an invoice can belong to only one owner.<br>
-*An invoice can record a pet only once, but a pet can be recorded in one or more invoices.<br>
-*An invoice can record one service only once, but a service can be on zero, one, or many Invoices.<br>
-*An employee can be recorded on none, one, or more than one invoice but an invoice can record one employee only once.<br>
+* A pet can have only one owner, but an owner can have one or more pets.<br>
+* An employee can have 0 or more pets assigned to him, but a pet must have at least one employee assigned to it.<br>
+* An employee can perform 0, 1, or many services, on a pet, but a pet must receive at least one service.<br>
+* An owner can have none or many invoices, but an invoice can belong to only one owner.<br>
+* An invoice can record a pet only once, but a pet can be recorded in one or more invoices.<br>
+* An invoice can record one service only once, but a service can be on zero, one, or many Invoices.<br>
+* An employee can be recorded on none, one, or more than one invoice but an invoice can record one employee only once.<br>
      
 ## Entity-Relationship Diagram
  
@@ -126,6 +128,7 @@ Select o.Ownerfname, o.Ownerlname, p.petname, p.Type,i.date From Invoices i<br>
 left join Owners o on i.OwnerID = o.OwnerID<br>
 left join Pets p on i.PetID = p.PetID<br>
 where p.type = "Dog" Order by i.Date desc Limit 5;<br>
+
 We just bought some new products for dogs and want to invite the latest 5 dog customers for a free trial so we can get feedback about these new 
 products and whether it will be beneficial if we introduce them in the new store, keep them only in the current store, both, or neither.<br>
 
@@ -203,8 +206,8 @@ Select Count(Invoices.EmployeeID) as No_ofServicesPerformed, Employees.EmployeeF
 Employees.EmployeeID from Employees<br>
 Join Invoices ON Invoices.EmployeeID = Employees.EmployeeID Group By Employees.EmployeeID<br>
 Order by<br>
-Count(Invoices.EmployeeID) DESC Limit 2;<br
-                                            >
+Count(Invoices.EmployeeID) DESC Limit 2;<br>
+
 We need efficient employees to work at the new location for the first few weeks to get the business up and running. These employees need to be 
 familiar with most of our services and also be experienced since they will be supervising new employees at the new store.<br>
 
@@ -255,14 +258,14 @@ left join Employees e on i.EmployeeID = e.EmployeeID Left join Owners o on i.Own
 Group by i.EmployeeID<br>
 having count(distinct o.OwnerID) > 3 Order by num_of_Owners_served desc;<br>
  
-We want to know if there are any special requests that customers tend to ask for and are not included in our current portfolio. Therefore, we find
-out the employees who have served more than 3 different customers that we think are a good number to ask for opinions.<br>
+We want to know if there are any special requests that customers tend to ask for and are not included in our current portfolio. Therefore, we find out the employees who have served more than 3 different customers that we think are a good number to ask for opinions.<br>
 
 **21. Count the number of dogs and cats in Rock Springs.**<br>
 Select count(p.Type) as No_ofPets, p.Type<br>
 From Pets as p<br>
 left join Owners as o on o.OwnerID = p.OwnerID where<br>
 o.city = "Rock Springs" Group by p.type;<br>
+
 We want to know which is the most common pet in the city of Rock Springs (one of the cities with the most customers and a potential candidate 
 for a new store). This will help us better prepare for the kinds of services we are required to provide in the city and anticipate demand for
 each pet type.<br>
@@ -293,6 +296,7 @@ Select Owners.OwnerID, Owners.OwnerFName, Owners.OwnerLName<br>
 From Owners<br>
 Join Invoices on Invoices.OwnerID=Invoices.OwnerID Join Pets on Invoices.PetID=Pets.PetID Where Owners.OwnerLName Like 'A%'<br>
 Group by Owners.OwnerID;<br>
+
 An employee wants to look up a customer, they know it starts with A, but can't remember the whole last name so they want to see if they can 
 identify the customer based on what the name starts with.<br>
 
