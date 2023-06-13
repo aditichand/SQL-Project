@@ -1,16 +1,17 @@
 # SQL-Project
 
 # Table of Contents
-Background
-Business Problems and Objectives 4 Potential Features of the Customer Management System 
-Relational Data Model 
-Assumptions/Notes About Data Entities and Relationships 
-Entity-Relationship Diagram 
-Physical MySQL Database 
-Screenshot of Physical Database objects 8 Data in the Database 
-Business Solutions using Queries 
-SQL Queries
-Stored Procedure 
+[Background](https://github.com/aditichand/SQL-Project/tree/main#background) <br>
+[Business Problems and Objectives](https://github.com/aditichand/SQL-Project/tree/main#business-problems-and-objectives) <br>
+[Potential Features of the Customer Management System](https://github.com/aditichand/SQL-Project/tree/main#potential-features-of-the-customer-management-system) <br>
+[Relational Data Model](https://github.com/aditichand/SQL-Project/tree/main#relational-data-model) <br>
+[Assumptions/Notes About Data Entities and Relationships](https://github.com/aditichand/SQL-Project/tree/main#assumption-/-notes-about-data-entities-and-relationships) <br>
+[Entity-Relationship Diagram](https://github.com/aditichand/SQL-Project/tree/main#entity-relationship-diagram) <br>
+[Physical MySQL Database](https://github.com/aditichand/SQL-Project/tree/main#physical-mysql-database) <br> 
+[Data in the Database](https://github.com/aditichand/SQL-Project/tree/main#data-in-the-database) <br>
+[Business Solutions using Queries](https://github.com/aditichand/SQL-Project/tree/main#business-solutions-using-queries) <br>
+[SQL Queries](https://github.com/aditichand/SQL-Project/tree/main#sql-queries) <br>
+[Stored Procedure](https://github.com/aditichand/SQL-Project/tree/main#stored-procedure) <br>
 
 
 ## Background
@@ -26,6 +27,7 @@ Our database was created with the knowledge that the business may well expand be
 
 ## Potential Features of the Customer Management System
 Through our system we hope to help the client gain easier access to insights for the purpose of <br>
+
 **➢ Identifying top customers**<br>
 Building a customer management system involves fleshing out your customer base and prioritizing them for retention, upselling, and word-of-mouth marketing opportunities.
 <br>**➢ Upselling opportunities**<br>
@@ -43,14 +45,14 @@ Pets(PetID, PetName, Type, OwnerID)<br>
 Services(ServiceID, ServiceName, Price)<br>
 Employees(EmployeeID, EmployeeFName, EmployeeLName, Title, Wage) Invoices(InvoiceNumber, PetID, OwnerID, ServiceID, EmployeeID, Date, Payment)<br>
 
-Assumptions/Notes About Data Entities and Relationships<br>
-● A pet can have only one owner, but an owner can have one or more pets.<br>
-● An employee can have 0 or more pets assigned to him, but a pet must have at least one employee assigned to it.<br>
-● An employee can perform 0, 1, or many services, on a pet, but a pet must receive at least one service.<br>
-● An owner can have none or many invoices, but an invoice can belong to only one owner.<br>
-● An invoice can record a pet only once, but a pet can be recorded in one or more invoices.<br>
-● An invoice can record one service only once, but a service can be on zero, one, or many Invoices.<br>
-● An employee can be recorded on none, one, or more than one invoice but an invoice can record one employee only once.<br>
+## Assumptions/Notes About Data Entities and Relationships<br>
+*A pet can have only one owner, but an owner can have one or more pets.<br>
+*An employee can have 0 or more pets assigned to him, but a pet must have at least one employee assigned to it.<br>
+*An employee can perform 0, 1, or many services, on a pet, but a pet must receive at least one service.<br>
+*An owner can have none or many invoices, but an invoice can belong to only one owner.<br>
+*An invoice can record a pet only once, but a pet can be recorded in one or more invoices.<br>
+*An invoice can record one service only once, but a service can be on zero, one, or many Invoices.<br>
+*An employee can be recorded on none, one, or more than one invoice but an invoice can record one employee only once.<br>
      
 ## Entity-Relationship Diagram
  
@@ -138,12 +140,13 @@ having count(distinct o.OwnerID) > 3 Order by num_of_Owners_served desc;<br>
 We want to know if there are any special requests that customers tend to ask for and are not included in our current portfolio. Therefore, we 
 find out the employees who have served more than 3 different customers that we think are a good number to ask for opinions.<br>
 
-**9. Count the number of dogs and cats in Rock Springs.**
+**9. Count the number of dogs and cats in Rock Springs.**<br>
 Select<br>
 count(p.Type) as No_ofPets, p.Type<br>
 From Pets as p<br>
 left join Owners as o on o.OwnerID = p.OwnerID where<br>
 o.city = "Rock Springs" Group by p.type;<br>
+
 We want to know which is the most common pet in the city of Rock Springs (one of the cities with the most customers and a potential candidate 
 for a new store). This will help us better prepare the kinds of services we are required to provide in the city and anticipate demand for each 
 pet type.<br>
@@ -169,7 +172,7 @@ that we might decide to start selling. For instance, in Rock Springs we can see 
 number of pets like cats is much lower in the city. This shows that cat owners spend more on their pets since the proportion of difference is 
 low between the total spending between the two types.<br>
 
-**12. Find all the people whose last name starts with A. List their first and last name.**
+**12. Find all the people whose last name starts with A. List their first and last name.**<br>
 Select Owners.OwnerID, Owners.OwnerFName, Owners.OwnerLName<br>
 From Owners<br>
 Join Invoices on Invoices.OwnerID=Invoices.OwnerID Join Pets on Invoices.PetID=Pets.PetID<br> 
@@ -215,7 +218,7 @@ We need to see what services each pet has already had so we know what each pet n
 what they have. This is essential in ensuring that each pet has the best service at our store and that both the pet and the owner leave the store 
 satisfied. <br>
 
-**17. Make a list of returning customers stating their first and last names and the number of visits.**
+**17. Make a list of returning customers stating their first and last names and the number of visits.**<br>
 Select<br>
 COUNT(Invoices.OwnerID) as No_ofVisits, OwnerFName,<br>
 OwnerLName FROM Invoices<br>
@@ -224,7 +227,7 @@ JOIN Owners ON Owners.OwnerID = Invoices.OwnerID Group By Invoices.OwnerID Havin
 We want to know which customers have developed a good relationship with our business. These customers can help us spread the word about our new 
 store throughout the state.<br>
 
-**18. Find the top 2 most popular services.**
+**18. Find the top 2 most popular services.**<br>
 Select Count(Invoices.ServiceID), Services.ServiceName From Services<br>
 Left Outer Join Invoices ON Invoices.ServiceID = Services.ServiceID Group by Invoices.ServiceID<br>
 Order by<br>
