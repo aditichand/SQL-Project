@@ -1,6 +1,6 @@
 # SQL-Project
 
-_Disclaimer: This project was done in a team of 6 as the final deliverable for a Master's Level Database Management course. The dataset and case description were chosen by the team. The project itself is very simple and easy to replicate and modify._
+_Disclaimer: This project was done in a team of 4 as the final deliverable for a Master's Level Database Management course. The dataset and case description were chosen by the team. The project itself is very simple and easy to replicate and modify._
 
 # Table of Contents
 * [Background](https://github.com/aditichand/SQL-Project/tree/main#background) <br>
